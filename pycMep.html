@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!-- saved from url=(0026)https://ave6990.ru/pycmep/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="author" content="">
+    <meta name="e-mail" content="">
+    <meta name="version" content="">
+    <title>
+      pycMep
+    </title>
+    <style type="text/css">
+      html {
+        color: black;
+        font: 40pt sans-serif;
+		font-weight: bold;
+      }
+	  hr {
+		border: 5px solid lightgray;
+      }
+	  h1, h2, h3 {
+		text-align: center;
+	  }
+      table {
+        border: 1px solid gray;
+        border-collapse: collapse;
+        margin: 4pt 0;
+        width: 100%;
+      }
+      th, td {
+        padding: 20pt 10pt;
+        border: 1px solid lightgray;
+      }
+	  th {
+	  text-align: left;
+		width: 25%;
+      }
+	  footer {
+		text-align: center;
+		font-size: 55pt;
+	  }
+	  img {
+		align: center;
+	  }
+	  #stamp {
+		width: 100pt;
+		height: 100pt;
+	  }
+	  #engineer {
+		text-align: right;
+		border-bottom: 2px solid black;
+	  }
+	  .picture {
+		text-align: center;
+	  }
+    </style>
+
+  </head>
+  <body>
+    <header>
+      <h1>ФБУ «Саратовский ЦСМ<br>им. Б.А. Дубовикова»</h1>
+      <p class="picture"><img src="https://thumb.cloud.mail.ru/weblink/thumb/xw1/yhDR/v6U3bg3nn"></p>
+	  <hr>
+    </header>
+    <main>
+	  <h2>Серификат о метрологическом контроле состояния</h2>
+      <p class="picture"><img id="button" src="https://thumb.cloud.mail.ru/weblink/thumb/xw1/LFDQ/jiji7jSsi"></p>
+      <table>
+        <tbody><tr>
+          <th>Имя:</th>
+          <td class="field" id="name" contenteditable="true"></td>
+        </tr>
+        <tr>
+          <th>Рост:</th>
+          <td class="field" id="height" contenteditable="true"></td>
+        </tr><tr>
+          <th>Вес:</th>
+          <td class="field" id="weight" contenteditable="true"></td>
+        </tr>
+          <tr><th>Сила:</th>
+          <td class="field" id="force" contenteditable="true">Богатырская</td>
+        </tr>
+      </tbody></table>
+	  <p id="stamp"></p>
+      <p>Измерения провел:</p>
+	  <p id="engineer" contenteditable="true">Стрелец-Молодец</p>
+	  <hr>
+    </main>
+    <footer>
+      <p>Саратов<br>2024</p>
+    </footer>
+	    <script>
+      
+		const heightUnits = {sagen: 1 / 176,
+		 arshin: 1 / 71.12,
+		 shag: 1 / 71,
+		 locot: 1 / 45,
+		 //fut: 1 / 30.48,
+		 pjad: 1 / 17.78,
+		 ladon: 1 / 7.5,
+		 vershok: 1 / 4.44,
+		 perst: 1 / 2,
+		}
+		
+		const sHeightUnits = {sagen: ["маховая сажень", "маховые сажени", "маховых саженей"],
+			arshin: ["аршин", "аршина", "аршинов"],
+			shag: ["шаг", "шага", "шагов"],
+			locot: ["локоть", "локтя", "локтей"],
+			//fut: ["фут", "фута", "футов"],
+			pjad: ["пядь", "пяди", "пядей"],
+			ladon: ["ладонь", "ладони", "ладоней"],
+			vershok: ["вершок", "вершка", "вершков"],
+			perst: ["перст", "перста", "перстов"],}
+			
+		const weightUnits = {
+			pud: 1 / 16.38,
+			batman: 1 / 4.095,
+			besmen: 1 / 1.022,
+			funt: 1 / 0.4095,
+			polugrivennik: 1 / 0.1024,
+			lot: 1 / 0.0128,
+			zolotnik: 1 / 0.004266,
+		}
+		
+		const sWeightUnits = {
+			pud: ["пуд", "пуда", "пудов"],
+			batman: ["батман", "батмана", "батманов"],
+			besmen: ["безмен", "безмена", "безменов"],
+			funt: ["фунт", "фунта", "фунтов"],
+			polugrivennik: ["полугривенник", "полугривенника", "полугривенников"],
+			lot: ["лот", "лота", "лотов"],
+			zolotnik: ["золотник", "золотника", "золотников"],
+		}
+			
+	  const force = document.getElementById("force")
+	  const button = document.getElementById('button')
+	  
+	  button.addEventListener('click', () => {
+		const height = document.getElementById("height")
+		const weight = document.getElementById("weight")
+		height.innerHTML = Converter(height.innerHTML, heightUnits, sHeightUnits)
+		weight.innerHTML = Converter(weight.innerHTML, weightUnits, sWeightUnits)
+	  })
+	  
+	  const Converter = (val, units, sUnits) => {
+		let res = ''
+		
+		for (unit of Object.keys(units)) {
+			const v = Math.floor(val * units[unit])
+			if (v > 0) {
+				res = `${res} ${v} ${sUnits[unit][cnt(v)]}`
+			}
+			val = val - v / units[unit]
+		}
+		
+		return res
+	  }
+	  
+	  const cnt = (val) => {
+		if (10 <= val && val <= 20) {
+			return 2
+		}
+		if ((val % 10) == 1) {
+			return 0
+		}
+		return 1
+	  }
+    </script>
+  
+
+</body></html>
