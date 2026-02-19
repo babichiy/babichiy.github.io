@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма опроса</title>
+    <title>Онлайн тест</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
             background: white;
             padding: 20px;
@@ -22,22 +22,14 @@
         h2 {
             text-align: center;
         }
+        .question {
+            margin-bottom: 20px;
+        }
         label {
             display: block;
             margin-bottom: 8px;
-            font-weight: bold;
         }
-        input[type="text"],
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        input[type="radio"],
-        input[type="checkbox"] {
+        input[type="radio"] {
             margin-right: 10px;
         }
         button {
@@ -56,22 +48,48 @@
 </head>
 <body>
     <div class="container">
-        <h2>Форма опроса</h2>
+        <h2>Онлайн тест</h2>
         <form>
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" required>
+            <div class="question">
+                <label>1. Какой язык программирования используется для веб-разработки?</label>
+                <label><input type="radio" name="question1" value="html" required> HTML</label>
+                <label><input type="radio" name="question1" value="python"> Python</label>
+                <label><input type="radio" name="question1" value="css"> CSS</label>
+                <label><input type="radio" name="question1" value="java"> Java</label>
+            </div>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <div class="question">
+                <label>2. Какой из этих браузеров является самым популярным?</label>
+                <label><input type="radio" name="question2" value="chrome" required> Google Chrome</label>
+                <label><input type="radio" name="question2" value="firefox"> Firefox</label>
+                <label><input type="radio" name="question2" value="edge"> Microsoft Edge</label>
+                <label><input type="radio" name="question2" value="safari"> Safari</label>
+            </div>
 
-            <label>Ваши предпочтения:</label>
-            <label><input type="radio" name="preference" value="option1" required> Вариант 1</label>
-            <label><input type="radio" name="preference" value="option2"> Вариант 2</label>
-            <label><input type="radio" name="preference" value="option3"> Вариант 3</label>
+            <div class="question">
+                <label>3. Что такое CSS?</label>
+                <label><input type="radio" name="question3" value="style" required> Каскадные таблицы стилей</label>
+                <label><input type="radio" name="question3" value="script"> Язык программирования</label>
+                <label><input type="radio" name="question3" value="markup"> Язык разметки</label>
+                <label><input type="radio" name="question3" value="database"> Система управления базами данных</label>
+            </div>
 
-            <label for="message">Сообщение:</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
+            <div class="question">
+                <label>4. Какой инструмент используется для проверки валидности HTML?</label>
+                <label><input type="radio" name="question4" value="validator" required> W3C Validator</label>
+                <label><input type="radio" name="question4" value="debugger"> Debugger</label>
+                <label><input type="radio" name="question4" value="editor"> Code Editor</label>
+                <label><input type="radio" name="question4" value="compiler"> Compiler</label>
+            </div>
 
+            <div class="question">
+                <label>5. Что такое JavaScript?</label>
+                <label><input type="radio" name="question5" value="programming" required> Язык программирования для веб</label>
+                <label><input type="radio" name="question5" value="markup"> Язык разметки</label>
+                <label><input type="radio" name="question5" value="style"> Язык стилей</label>
+                <label><input type="radio" name="question5" value="database"> Система управления базами данных</label>
+            </div>
+            
             <button type="submit">Отправить</button>
         </form>
     </div>
