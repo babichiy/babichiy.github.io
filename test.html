@@ -2,96 +2,162 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Онлайн тест</title>
+    <meta name="author" content="">
+    <meta name="version" content="">
+    <title>pycMep</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
+        html {
+            color: black;
+            font: 40pt sans-serif;
+            font-weight: bold;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        hr {
+            border: 5px solid lightgray;
         }
-        h2 {
+        h1, h2, h3 {
             text-align: center;
         }
-        .question {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
-        input[type="radio"] {
-            margin-right: 10px;
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        table {
+            border: 1px solid gray;
+            border-collapse: collapse;
+            margin: 4pt 0;
             width: 100%;
         }
-        button:hover {
-            background-color: #4cae4c;
+        th, td {
+            padding: 20pt 10pt;
+            border: 1px solid lightgray;
+        }
+        th {
+            text-align: left;
+            width: 25%;
+        }
+        footer {
+            text-align: center;
+            font-size: 45pt;
+        }
+        .picture {
+            text-align: center;
+        }
+        #stamp {
+            width: 100pt;
+            height: 100pt;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Онлайн тест</h2>
-        <form>
-            <div class="question">
-                <label>1. Какой язык программирования используется для веб-разработки?</label>
-                <label><input type="radio" name="question1" value="html" required> HTML</label>
-                <label><input type="radio" name="question1" value="python"> Python</label>
-                <label><input type="radio" name="question1" value="css"> CSS</label>
-                <label><input type="radio" name="question1" value="java"> Java</label>
-            </div>
+    <header>
+        <h1>ФБУ «Саратовский ЦСМ им. Б.А. Дубовикова»</h1>
+        <figure class="picture">
+            <img src="https://thumb.cloud.mail.ru/weblink/thumb/xw1/yhDR/v6U3bg3nn" alt="Логотип ФБУ Саратовский ЦСМ">
+        </figure>
+        <hr>
+    </header>
+    <main>
+        <h2>Сертификат о метрологическом контроле состояния</h2>
+        <figure class="picture">
+            <img id="button" src="https://thumb.cloud.mail.ru/weblink/thumb/xw1/LFDQ/jiji7jSsi" alt="Кнопка">
+        </figure>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Имя:</th>
+                    <td class="field" id="name" contenteditable="true"></td>
+                </tr>
+                <tr>
+                    <th>Рост:</th>
+                    <td class="field" id="height" contenteditable="true"></td>
+                </tr>
+                <tr>
+                    <th>Вес:</th>
+                    <td class="field" id="weight" contenteditable="true"></td>
+                </tr>
+                <tr>
+                    <th>Сила:</th>
+                    <td class="field" id="force" contenteditable="true">Богатырская</td>
+                </tr>
+            </tbody>
+        </table>
+        <p id="stamp"></p>
+        <p>Измерения провел:</p>
+        <p id="engineer" contenteditable="true">Андрюнин Александр</p>
+        <hr>
+    </main>
+    <footer>
+        <p>Саратов<br>2026</p>
+    </footer>
 
-            <div class="question">
-                <label>2. Какой из этих браузеров является самым популярным?</label>
-                <label><input type="radio" name="question2" value="chrome" required> Google Chrome</label>
-                <label><input type="radio" name="question2" value="firefox"> Firefox</label>
-                <label><input type="radio" name="question2" value="edge"> Microsoft Edge</label>
-                <label><input type="radio" name="question2" value="safari"> Safari</label>
-            </div>
+    <script>
+        const heightUnits = {
+            sagen: 1 / 176,
+            arshin: 1 / 71.12,
+            shag: 1 / 71,
+            locot: 1 / 45,
+            fut: 1 / 30.48,
+            pjad: 1 / 17.78,
+            ladon: 1 / 7.5,
+            vershok: 1 / 4.44,
+            perst: 1 / 2,
+        };
 
-            <div class="question">
-                <label>3. Что такое CSS?</label>
-                <label><input type="radio" name="question3" value="style" required> Каскадные таблицы стилей</label>
-                <label><input type="radio" name="question3" value="script"> Язык программирования</label>
-                <label><input type="radio" name="question3" value="markup"> Язык разметки</label>
-                <label><input type="radio" name="question3" value="database"> Система управления базами данных</label>
-            </div>
+        const sHeightUnits = {
+            sagen: ["маховая сажень", "маховые сажени", "маховых саженей"],
+            arshin: ["аршин", "аршина", "аршинов"],
+            shag: ["шаг", "шага", "шагов"],
+            locot: ["локоть", "локтя", "локтей"],
+            fut: ["фут", "фута", "футов"],
+            pjad: ["пядь", "пяди", "пядей"],
+            ladon: ["ладонь", "ладони", "ладоней"],
+            vershok: ["вершок", "вершка", "вершков"],
+            perst: ["перст", "перста", "перстов"],
+        };
 
-            <div class="question">
-                <label>4. Какой инструмент используется для проверки валидности HTML?</label>
-                <label><input type="radio" name="question4" value="validator" required> W3C Validator</label>
-                <label><input type="radio" name="question4" value="debugger"> Debugger</label>
-                <label><input type="radio" name="question4" value="editor"> Code Editor</label>
-                <label><input type="radio" name="question4" value="compiler"> Compiler</label>
-            </div>
+        const weightUnits = {
+            pud: 1 / 16.38,
+            batman: 1 / 4.095,
+            besmen: 1 / 1.022,
+            funt: 1 / 0.4095,
+            polugrivennik: 1 / 0.1024,
+            lot: 1 / 0.0128,
+            zolotnik: 1 / 0.004266,
+        };
 
-            <div class="question">
-                <label>5. Что такое JavaScript?</label>
-                <label><input type="radio" name="question5" value="programming" required> Язык программирования для веб</label>
-                <label><input type="radio" name="question5" value="markup"> Язык разметки</label>
-                <label><input type="radio" name="question5" value="style"> Язык стилей</label>
-                <label><input type="radio" name="question5" value="database"> Система управления базами данных</label>
-            </div>
-            
-            <button type="submit">Отправить</button>
-        </form>
-    </div>
+        const sWeightUnits = {
+            pud: ["пуд", "пуда", "пудов"],
+            batman: ["батман", "батмана", "батманов"],
+            besmen: ["безмен", "безмена", "безменов"],
+            funt: ["фунт", "фунта", "фунтов"],
+            polugrivennik: ["полугривенник", "полугривенника", "полугривенников"],
+            lot: ["лот", "лота", "лотов"],
+            zolotnik: ["золотник", "золотника", "золотников"],
+        };
+
+        const button = document.getElementById('button');
+        button.addEventListener('click', () => {
+            const height = document.getElementById("height");
+            const weight = document.getElementById("weight");
+            height.innerHTML = Converter(height.innerHTML, heightUnits, sHeightUnits);
+            weight.innerHTML = Converter(weight.innerHTML, weightUnits, sWeightUnits);
+        });
+
+        const Converter = (val, units, sUnits) => {
+            let res = '';
+            let value = parseFloat(val); // Преобразование значения в число
+
+            for (const unit of Object.keys(units)) {
+                const v = Math.floor(value * units[unit]);
+                if (v > 0) {
+                    res += `${v} ${sUnits[unit][cnt(v)]} `;
+                }
+                value -= (v / units[unit]);
+            }
+            return res.trim(); // Удаляем лишние пробелы  
+        };
+
+        const cnt = (val) => {
+            if (10 <= val && val <= 20) return 2;
+            if ((val % 10) === 1) return 0;
+            return 1;
+        };
+    </script>
 </body>
 </html>
